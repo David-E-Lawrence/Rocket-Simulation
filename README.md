@@ -1,24 +1,26 @@
-# Rocket Flight Simulator (v0.1)
+# Rocket Flight Simulator (v0.2)
 
-1D rocket flight simulation using Euler integration, thrust, gravity, and fuel consumption.
+2D rocket flight simulation using a drag model, variable rocket conditions, and Euler integration.
 
 ---
 
 ## Features
 
-- 1D vertical motion
+- 2D vector-based motion and physics
+- Basic drag model
+- Variable environmental conditions based on location of rocket
 - Thrust-based propulsion model
 - Fuel-limited engine burn
 - Euler integration
-- CSV and PNG logging of flight data
+- npy, svg, csv, and png logging of flight data
 
 ---
 
 ## Physics Assumptions
 
-- Earth gravity (9.81 m/s^2); does not account for distance from center of gravity
-- No atmospheric drag
-- 1D vertical motion only
+- 2D motion only
+- Drag based on realistic constant calculations, not simulated fluid flow
+- Atmospheric pressure determined by altitude and atmospheric layer alone
 - Constant mass flow rate
 - Instant throttle response
 - Simple Euler integration
