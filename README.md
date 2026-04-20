@@ -7,7 +7,7 @@
 ## Features
 
 - 2D vector-based motion and physics
-- Basic drag model
+- Basic drag model (including transonic drag divergence)
 - Variable environmental conditions based on location of rocket
 - Thrust-based propulsion model
 - Fuel-limited engine burn
