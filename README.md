@@ -1,6 +1,10 @@
 # Rocket Flight Simulator (v0.2)
 
-2D rocket flight simulation using a drag model, variable rocket conditions, and Euler integration.
+2D rocket flight simulation using a drag model, variable rocket conditions, and generating post-flight summary
+
+---
+
+![Trajectory](runs/example/trajectory.svg)
 
 ---
 
@@ -8,6 +12,7 @@
 
 - 2D vector-based motion and physics
 - Basic drag model (including transonic drag divergence)
+- Post-flight visualization of trajectory, altitude, drag, speed, and fuel
 - Variable environmental conditions based on location of rocket
 - Thrust-based propulsion model
 - Fuel-limited engine burn
