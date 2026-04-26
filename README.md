@@ -6,7 +6,7 @@
 
 ## Example Run
 
-![Trajectory](runs/example/trajectory.svg)
+![Trajectory](runs/example/plots/trajectory.svg)
 
 ---
 
@@ -19,7 +19,7 @@
 - Thrust-based propulsion model
 - Fuel-limited engine burn
 - Euler integration
-- npy, svg, csv, and png logging of flight data
+- Asynchronous program logging
 
 ---
 
@@ -31,6 +31,14 @@
 - Constant mass flow rate
 - Instant throttle response
 - Simple Euler integration
+
+---
+
+## Requirements
+
+- **CPU:** Multi-core CPU
+- **Memory:** 16 GB required (32 GB recommended)
+- **Storage:** SSD recommended
 
 ---
 
