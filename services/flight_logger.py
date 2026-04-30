@@ -4,15 +4,16 @@ import logging
 
 
 class Flight_Logger:
-    def __init__(self, run_dir):
+    def __init__(self, run_dir, instance):
         self.run_dir = run_dir
+        self.instance=instance
 
         # store raw data in memory first
         self.data = []
 
         self.logger=logging.getLogger("Rocket_Simulation.Flight_Logger")
 
-    def log(self, time, pos, v, fuel_mass, drag, alt):
+    def log(self, time, pos, v, fuel_mass, drag, alt, heading):
         self.logger.debug("Logging flight data")
         self.data.append([
             time,
@@ -20,14 +21,16 @@ class Flight_Logger:
             v[0], v[1],
             fuel_mass,
             drag,
-            alt
+            alt, 
+            heading
         ])
 
-    def save(self, filename="flight_log.npy"):
+    def save(self):
+        filename=f"flight_log.npy"
+
         self.logger.info("Saving flight data")
 
-        arr = np.array(self.data)
-        np.save(os.path.join(self.run_dir, filename), arr)
+        np.save(os.path.join(self.run_dir, filename), np.asarray(self.data))
         
     def __enter__(self):
         return self

@@ -1,6 +1,7 @@
 {
-    "max_sim_time": 100000,
-    "max_run_time": 600,
+    "rocket_count": 8,
+    "max_sim_time": 1000000,
+    "max_run_time": 500,
     "dt": 0.01,
     "progress_interval": 1000,
     "log_level": {
