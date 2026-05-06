@@ -6,11 +6,10 @@ import models.environment as environment
 from services.flight_logger import Flight_Logger
 from services.plot_flight import plot, plot_all
 from datetime import datetime
-from services.analyze_flight import analyze
 import numpy as np
 import json
-from services.logger import get_logger
 from concurrent.futures import ProcessPoolExecutor
+from services.analyze_flight import analyze
 
 def step_rocket(physics, rocket, flight_logger, env, dt, t):
     rocket.assert_heading()
@@ -44,18 +43,12 @@ def simulate_rocket(i, config, run_dir):
         step_rocket(physics, rocket, flight_logger, env, dt, t)
 
         t+=dt
-        #if t%progress_interval<=dt:
-        #    logger.info(f"Simulation time: {round(t)}s")
-        #logger.debug(f"Simulation time: {t}")
     
         if env.alt(rocket.state["pos"]) < 0:
-            #logger.info("Rocket has impacted the ground")
             break
         if (datetime.now()-start_time).total_seconds() >= config["max_run_time"]:
-            #logger.info("Maximum runtime reached")
             break
         if t >= config["max_sim_time"]:
-            #logger.info("Maximum time simulated reached")
             break
     flight_logger.save()
     del flight_logger.data
@@ -65,10 +58,10 @@ def simulate_rocket(i, config, run_dir):
     try:
         os.mkdir(plot_dir)
     except FileExistsError:
-        #logger.warning("Plot directory already exists")
         pass
 
     plot(flight_logger.run_dir, plot_dir)
+    analyze(rocket_dir)
 
 if __name__ == "__main__":
 
@@ -77,29 +70,13 @@ if __name__ == "__main__":
     with open("config.json", "r") as f:
         config=json.load(f)
 
-    # initializing logger
-
     run_id = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     run_dir = f"runs/run_{run_id}"
 
-    try:
-        os.makedirs(run_dir)
-
-        run_dir_exists = False
-    except FileExistsError:
-        run_dir_exists = True
-
-    logger, listener = get_logger(config, run_dir)
-
-    if run_dir_exists:
-        logger.warning("Run directory already exists, logs may be overwritten")
-
-    del run_dir_exists
+    os.makedirs(run_dir, exist_ok=True)
 
     # simulation loop
-
-    logger.info("Starting simulation")
-
+    print("simulating rockets")
     with ProcessPoolExecutor(max_workers=os.cpu_count()) as executor:
         executor.map(
             simulate_rocket,
@@ -108,18 +85,5 @@ if __name__ == "__main__":
             [run_dir] * config["rocket_count"]
         )
 
-    logger.info("Simulation complete")
-
-    # plot the results
-
-    # analyze the results
-    """
-    analyze(run_dir)
-    """
-
+    print("Plotting rocket flights")
     plot_all(run_dir, config["rocket_count"])
-
-    # Stop the logging listener
-    logger.info("Stopping logging listener")
-
-    listener.stop()

@@ -2,15 +2,8 @@ import os
 from matplotlib.patches import Circle
 import matplotlib.pyplot as plt
 import numpy as np
-import logging
 
 def plot(run_dir, plot_dir):
-
-        #logger=logging.getLogger("Rocket_Simulation.Plotting")
-
-        #logger.info("Plotting flight data")
-
-        #logger.debug("Loading flight data for plotting")
 
         data = np.load(os.path.join(run_dir, "flight_log.npy"), allow_pickle=True)
 
@@ -20,8 +13,6 @@ def plot(run_dir, plot_dir):
         fuel = data[:, 5]
 
         # altitude
-
-        #logger.debug("Plotting altitude vs time")
 
         plt.figure()
         plt.plot(t, altitude)
@@ -33,7 +24,6 @@ def plot(run_dir, plot_dir):
         plt.close()
 
         # velocity
-        #logger.debug("Plotting speed vs time")
         plt.figure()
         plt.plot(t, speed)
         plt.xlabel("Time (s)")
@@ -44,7 +34,6 @@ def plot(run_dir, plot_dir):
         plt.close()
 
         # fuel
-        #logger.debug("Plotting fuel vs time")
         plt.figure()
         plt.plot(t, fuel)
         plt.xlabel("Time (s)")
@@ -55,7 +44,6 @@ def plot(run_dir, plot_dir):
         plt.close()
 
         # trajectory
-        #logger.debug("Plotting trajectory")
         plt.figure()
         plt.plot(data[:, 1], data[:, 2], lw=1)
 
@@ -89,8 +77,6 @@ def plot(run_dir, plot_dir):
 
         # drag
 
-        #logger.debug("Plotting drag vs time")
-
         plt.figure()
         plt.xlabel("Time (s)")
         plt.ylabel("Drag (N)")
@@ -101,11 +87,7 @@ def plot(run_dir, plot_dir):
         plt.savefig(os.path.join(plot_dir, "drag.png"))
         plt.close()
 
-        #logger.debug("Finished plotting flight data")
-
         # heading
-
-        #logger.debug("Plotting heading")
 
         plt.figure()
         plt.xlabel("Time (s)")
@@ -125,7 +107,7 @@ def plot_all(run_dir, rocket_count):
         ymin=1000
 
         for i in range(rocket_count):
-                print(f"{i} out of {rocket_count}")
+                print(f"{i+1} out of {rocket_count}")
                 data=np.load(os.path.join(run_dir, f"rocket_{i}", "flight_log.npy"), allow_pickle=True)
                 plt.plot(data[:, 1], data[:, 2], lw=1)
 
@@ -157,6 +139,5 @@ def plot_all(run_dir, rocket_count):
         plt.ylabel("y")
         plt.title("Trajectory")
         plt.grid()
-        #plt.axis("equal")
         plt.savefig(os.path.join(run_dir, "trajectory.svg"))
         plt.close()

@@ -1,5 +1,4 @@
 import numpy as np
-import logging
 
 class Rocket:
     def __init__(self, state, controller):
@@ -17,12 +16,10 @@ class Rocket:
         self.cross_section=10.5 # m^2
         self.side_area=256 # m^2
 
-        self.logger=logging.getLogger("Rocket_Simulation.Rocket")
         self.controller=controller
 
     # this determines the cross sectional area of the rocket based on its directional travel in relation to the angle at which it is facing
     def get_cross_sectional_area(self):
-        self.logger.debug("Calculating cross-sectional area")
 
         assert not np.isnan(np.cos(self.state["heading"]))
         assert not np.isnan(np.sin(self.state["heading"]))
@@ -44,7 +41,6 @@ class Rocket:
         return area
     # this finds the constant for drag based on the rocket's speed relative to sound, modeled with significant drag at transonic speeds
     def Cd(self, mach):
-        self.logger.debug("Calculating drag coefficient")
         return (
         0.25
         + 0.3 * np.exp(-((mach - 1.0)/0.25)**2)

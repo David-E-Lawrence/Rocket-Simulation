@@ -1,15 +1,11 @@
 import numpy as np
-import logging
 
 class Physics:
     def __init__(self):
         self.G=6.67430e-11 # m^3 kg^-1 s^-2
-        self.logger=logging.getLogger("Rocket_Simulation.Physics")
     def step(self, dt, rocket, env):
 
         # collecting relevant data
-
-        self.logger.debug("Collecting relevant data for physics step")
 
         m=rocket.state["dry_mass"]+rocket.state["fuel_mass"] # kg
         fuel_consumption=rocket.state["throttle"]*rocket.state["mass_flow_rate"] # kg/s
@@ -30,13 +26,9 @@ class Physics:
 
         # update fuel mass
 
-        self.logger.debug("Updating fuel mass for physics step")
-
         fuel_mass-=fuel_consumed
 
         # update rocket state
-
-        self.logger.debug("Updating rocket state for physics step")
 
         rocket.state["pos"]=pos
         rocket.state["v"]=v
@@ -44,8 +36,6 @@ class Physics:
         
         return np.linalg.norm(drag)
     def find_drag(self,rocket, env):
-
-        self.logger.debug("Calculating drag for physics step")
 
         # collecting relevant variables
         air_density=env.air_density(rocket.state["pos"])
@@ -61,8 +51,6 @@ class Physics:
     
     # this is based on the gravity equation, utilized to account for diminishing gravity as the rocket gets further from the center of the earth
     def gravity(self, rocket, env):
-
-        self.logger.debug("Calculating gravity for physics step")
         r=np.linalg.norm(rocket.state["pos"])
         direction=-(rocket.state["pos"]/np.linalg.norm(rocket.state["pos"]))
         m1=env.m

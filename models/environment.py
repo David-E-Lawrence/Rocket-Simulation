@@ -1,19 +1,16 @@
 import numpy as np
-import logging
+
 
 class Earth():
     def __init__(self):
         self.planetary_radius=6380000.0
         self.m=5.972e24
 
-        self.logger=logging.getLogger("Rocket_Simulation.Environment")
     # returns altitude in m
     def alt(self, pos):
-        self.logger.debug("Calculating altitude")
         return np.linalg.norm(pos)-self.planetary_radius
     # this returns air density in kg/m^3
     def air_density(self, pos):
-        self.logger.debug("Calculating air density")
 
         h = self.alt(pos)
 
@@ -49,6 +46,5 @@ class Earth():
         return p / (R * T)
     # this returns the speed of sound in m/s
     def mach(self, pos):
-        self.logger.debug("Calculating Mach number")
         rho = self.air_density(pos)
         return 340 * np.sqrt(rho / 1.225)
