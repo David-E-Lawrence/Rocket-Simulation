@@ -39,7 +39,7 @@ class Physics:
 
         # collecting relevant variables
         air_density=env.air_density(rocket.state["pos"])
-        if air_density<1e-7:
+        if air_density<1e-11:
             return 0
         cross_sectional_area=rocket.get_cross_sectional_area()
         cd=rocket.Cd(np.linalg.norm(rocket.state["v"])/env.mach(rocket.state["pos"]))

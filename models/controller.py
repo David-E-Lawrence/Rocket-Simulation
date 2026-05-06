@@ -13,9 +13,9 @@ class Controller:
         else:
             direction=np.pi/2
 
-        if self.env.alt(state["pos"])<10000:
+        if self.env.alt(state["pos"])<112000*self.instance_standing:
             theta=np.pi/2
         else:
-            theta=direction-(self.instance_standing*np.pi/1.9)
+            theta=direction-(np.pi/2)
 
         return theta

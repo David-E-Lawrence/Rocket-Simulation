@@ -1,5 +1,5 @@
 {
-    "rocket_count": 8,
+    "rocket_count": 4,
     "max_sim_time": 1000000,
     "max_run_time": 500,
     "dt": 0.01,

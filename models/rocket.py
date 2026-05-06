@@ -9,7 +9,7 @@ class Rocket:
             "fuel_mass": state["fuel_mass"],
             "max_thrust": state["max_thrust"],
             "mass_flow_rate": state["mass_flow_rate"],
-            "throttle": 1,
+            "throttle": 0.3,
             "heading": np.pi/2,
         }
 

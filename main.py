@@ -25,7 +25,7 @@ def simulate_rocket(i, config, run_dir):
                 "pos": np.array([0.0, env.planetary_radius+1]),
                 "dry_mass": 156500,
                 "fuel_mass": 410900,
-                "max_thrust": 7562000*2.75,
+                "max_thrust": 7562000*3.6,
                 "mass_flow_rate": 2300,
             },
             controller=Controller(i, config["rocket_count"], env)
