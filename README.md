@@ -1,4 +1,4 @@
-# Rocket Flight Simulator (v0.4)
+# Rocket Flight Simulator (v0.5)
 
 Concurrent 2D rocket flight simulation of several rockets using a drag model, variable rocket conditions, and Euler integration.
 
